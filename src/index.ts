@@ -11,7 +11,7 @@ import { hideBin } from 'yargs/helpers';
 
 dotenv.config();
 
-const API_KEY = process.env.TAVILY_API_KEY;
+const API_KEY = process.env.SEARCH_API_KEY;
 
 
 interface TavilyResponse {
@@ -155,7 +155,7 @@ class TavilyClient {
       // Define available tools: tavily_search and tavily_extract
       const tools: Tool[] = [
         {
-          name: "tavily_search",
+          name: "search",
           description: "Search the web for current information on any topic. Use for news, facts, or data beyond your knowledge cutoff. Returns snippets and source URLs.",
           inputSchema: {
             type: "object",
@@ -244,7 +244,7 @@ class TavilyClient {
           }
         },
         {
-          name: "tavily_extract",
+          name: "extract",
           description: "Extract content from URLs. Returns raw page content in markdown or text format.",
           inputSchema: {
             type: "object",
@@ -285,7 +285,7 @@ class TavilyClient {
           }
         },
         {
-          name: "tavily_crawl",
+          name: "crawl",
           description: "Crawl a website starting from a URL. Extracts content from pages with configurable depth and breadth.",
           inputSchema: {
             type: "object",
@@ -355,7 +355,7 @@ class TavilyClient {
           }
         },
         {
-          name: "tavily_map",
+          name: "map",
           description: "Map a website's structure. Returns a list of URLs found starting from the base URL.",
           inputSchema: {
             type: "object",
@@ -408,7 +408,7 @@ class TavilyClient {
           }
         },
         {
-          name: "tavily_research",
+          name: "research",
           description: "Perform comprehensive research on a given topic or question. Use this tool when you need to gather information from multiple sources to answer a question or complete a task. Returns a detailed response based on the research findings. Rate limit: 20 requests per minute.",
           inputSchema: {
             type: "object",
@@ -436,7 +436,7 @@ class TavilyClient {
       if (!API_KEY) {
         throw new McpError(
           ErrorCode.InvalidRequest,
-          "TAVILY_API_KEY environment variable is required. Please set it before using this MCP server."
+          "SEARCH_API_KEY environment variable is required. Please set it before using this MCP server."
         );
       }
 
