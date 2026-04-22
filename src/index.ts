@@ -445,7 +445,7 @@ class TavilyClient {
         const args = request.params.arguments ?? {};
 
         switch (request.params.name) {
-          case "tavily_search":
+          case "search":
             // If country is set, ensure topic is general
             if (args.country) {
               args.topic = "general";
@@ -470,7 +470,7 @@ class TavilyClient {
             });
             break;
           
-          case "tavily_extract":
+          case "extract":
             response = await this.extract({
               urls: args.urls,
               extract_depth: args.extract_depth,
@@ -481,7 +481,7 @@ class TavilyClient {
             });
             break;
 
-          case "tavily_crawl":
+          case "crawl":
             const crawlResponse = await this.crawl({
               url: args.url,
               max_depth: args.max_depth,
@@ -503,7 +503,7 @@ class TavilyClient {
               }]
             };
 
-          case "tavily_map":
+          case "map":
             const mapResponse = await this.map({
               url: args.url,
               max_depth: args.max_depth,
@@ -521,7 +521,7 @@ class TavilyClient {
               }]
             };
 
-          case "tavily_research":
+          case "research":
             const researchResponse = await this.research({
               input: args.input,
               model: args.model
@@ -851,23 +851,23 @@ function formatResearchResults(response: TavilyResearchResponse): string {
 function listTools(): void {
   const tools = [
     {
-      name: "tavily_search",
+      name: "search",
       description: "A real-time web search tool powered by Tavily's AI engine. Features include customizable search depth (basic/advanced/fast/ultra-fast), domain filtering, time-based filtering, and support for both general and news-specific searches. Returns comprehensive results with titles, URLs, content snippets, and optional image results."
     },
     {
-      name: "tavily_extract",
+      name: "extract",
       description: "Extracts and processes content from specified URLs with advanced parsing capabilities. Supports both basic and advanced extraction modes, with the latter providing enhanced data retrieval including tables and embedded content. Ideal for data collection, content analysis, and research tasks."
     },
     {
-      name: "tavily_crawl",
+      name: "crawl",
       description: "A sophisticated web crawler that systematically explores websites starting from a base URL. Features include configurable depth and breadth limits, domain filtering, path pattern matching, and category-based filtering. Perfect for comprehensive site analysis, content discovery, and structured data collection."
     },
     {
-      name: "tavily_map",
+      name: "map",
       description: "Creates detailed site maps by analyzing website structure and navigation paths. Offers configurable exploration depth, domain restrictions, and category filtering. Ideal for site audits, content organization analysis, and understanding website architecture and navigation patterns."
     },
     {
-      name: "tavily_research",
+      name: "research",
       description: "Performs comprehensive research on any topic or question by gathering information from multiple sources. Supports different research depths ('mini' for narrow tasks, 'pro' for broad research, 'auto' for automatic selection). Ideal for in-depth analysis, report generation, and answering complex questions requiring synthesis of multiple sources."
     }
   ];
